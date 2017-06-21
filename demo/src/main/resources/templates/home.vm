@@ -1,0 +1,35 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Getting Started: Serving Web Content</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+	<h2>显示字符串</h2>
+	<span> ${toUserName} </span> ${toUserName}---${time}--${message}
+	<h2>显示UserList---User对象</h2>
+	#foreach($u in $users)
+	<li>用户名:$u.name - --年龄：$u.age</li> #end
+	<h2>显示在表格---User对象</h2>
+	<table border=1>
+		<tr>
+			<td>年龄</td>
+			<td>姓名</td>
+		</tr>
+		#foreach($u in $users)
+		<tr>
+			<td>$u.name</td>
+			<td>$u.age</td>
+		</tr>
+		#end
+
+	</table>
+	
+	<form action="https://shenghuo.alipay.com/send/payment/fill.htm" method="post" target="_blank">
+<input name="optEmail" type="hidden" value="508115***@qq.com"><input name="payAmount" type="hidden" value="50">
+<input name="title" type="hidden" value="【网站赞助：50元】" placeholder="付款说明">
+<input name="pay" type="image" value="购买域名" src="http://www.woaika.cn/img/zhifubao.png">
+<input name="memo" type="hidden" value="注意：收款人和金额已设定，支付过程中请勿修改任何信息，直接点击 下一步 ">
+</form>
+</body>
+</html>

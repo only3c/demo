@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>com.example</groupId>
+	<artifactId>demo</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>jar</packaging>
+
+	<name>demo</name>
+	<description>Demo project for Spring Boot</description>
+
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>1.5.3.RELEASE</version>
+		<relativePath /> <!-- lookup parent from repository -->
+	</parent>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<java.version>1.8</java.version>
+		<server.port>8080</server.port>
+	</properties>
+	
+	<profiles>
+		<profile>
+			<id>mysql</id>
+			<activation>
+				<activeByDefault>false</activeByDefault>
+			</activation>
+			<properties>
+				<server.contextpath>demo</server.contextpath>
+				<spring.profiles.active>mysql</spring.profiles.active>
+				<datasource.driver>com.mysql.jdbc.Driver</datasource.driver>
+				<datasource.url>jdbc:mysql://localhost:3306/boot?createDatabaseIfNotExist=true&amp;useUnicode=true&amp;characterEncoding=utf-8&amp;autoReconnect=true</datasource.url>
+				<datasource.dialect>org.hibernate.dialect.MySQL5InnoDBDialect</datasource.dialect>
+                <datasource.username>root</datasource.username>
+                <datasource.password>root</datasource.password>
+                <datasource.jpa.hibernate.ddl-auto>update</datasource.jpa.hibernate.ddl-auto>
+                <datasource.jpa.show-sql>true</datasource.jpa.show-sql>
+			</properties>
+		</profile>
+		<profile>
+            <id>h2</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <cluster.site>1</cluster.site>
+                <spring.profiles.active>h2</spring.profiles.active>
+                <datasource.url>jdbc:h2:mem:demo_db;MVCC=TRUE;LOCK_TIMEOUT=10000;DB_CLOSE_ON_EXIT=FALSE</datasource.url>
+                <datasource.driver>org.h2.Driver</datasource.driver>
+                <datasource.username>sa</datasource.username>
+                <datasource.password></datasource.password>
+                <datasource.dialect>org.hibernate.dialect.H2Dialect</datasource.dialect>
+                <datasource.jpa.hibernate.ddl-auto>create-drop</datasource.jpa.hibernate.ddl-auto>
+                <datasource.jpa.show-sql>false</datasource.jpa.show-sql>
+            </properties>
+        </profile>
+	</profiles>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<optional>true</optional>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+		
+		<!-- spring boot mail -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-mail</artifactId>
+		</dependency>
+		<!-- 视图支持  login.vm -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-velocity</artifactId>
+			<version>1.4.0.RELEASE</version>
+		</dependency>
+		<!-- 安全机制 -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
+		</dependency>
+		
+		<!--spring data jpa -->
+		<!-- <dependency> -->
+		<!-- <groupId>org.springframework.data</groupId> -->
+		<!-- <artifactId>spring-data-jpa</artifactId> -->
+		<!-- </dependency> -->
+
+		<!-- <dependency> -->
+		<!-- <groupId>org.hibernate</groupId> -->
+		<!-- <artifactId>hibernate-entitymanager</artifactId> -->
+		<!-- </dependency> -->
+
+		<!-- Swagger2 -->
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger2</artifactId>
+			<version>2.2.2</version>
+		</dependency>
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger-ui</artifactId>
+			<version>2.2.2</version>
+		</dependency>
+		
+		<!-- h2 -->
+		<dependency>  
+    		<groupId>com.h2database</groupId>  
+    		<artifactId>h2</artifactId>  
+		</dependency>  
+		
+		<!-- thmleaf 文件上传 -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-thymeleaf</artifactId>
+		</dependency>
+		<!-- poi -->
+		<dependency>  
+            <groupId>org.apache.poi</groupId>  
+            <artifactId>poi</artifactId>  
+            <version>3.14</version>  
+        </dependency> 
+        <!-- iText 方式导出pdf --> 
+        <dependency>
+    		<groupId>com.lowagie</groupId>
+    		<artifactId>itext</artifactId>
+    		<version>4.2.2</version>
+		</dependency>
+		<dependency>
+        	<groupId>org.bouncycastle</groupId>
+        	<artifactId>bcprov-jdk15on</artifactId>
+        	<version>1.47</version>
+    	</dependency>
+    	<dependency>
+        	<groupId>org.bouncycastle</groupId>
+        	<artifactId>bcpkix-jdk15on</artifactId>
+        	<version>1.47</version>
+    	</dependency>
+    	<dependency>
+        	<groupId>org.bouncycastle</groupId>
+        	<artifactId>bcmail-jdk15on</artifactId>
+        	<version>1.47</version>
+    	</dependency>
+	</dependencies>
+
+	<build>
+	    <resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>true</filtering>
+				<excludes>
+					<exclude>/excel/**</exclude>
+					<exclude>/static/**</exclude>
+				</excludes>
+			</resource>
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>false</filtering>
+				<includes>
+					<include>/excel/**</include>
+					<include>/static/**/**</include>
+				</includes>
+			</resource>
+		</resources>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</build>
+
+
+</project>

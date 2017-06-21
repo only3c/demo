@@ -1,0 +1,6 @@
+<!DOCTYPE html>  
+<html>  
+<body>  
+    <p>有错误： $url  ------异常:$exception</p>  
+</body>  
+</html>  
